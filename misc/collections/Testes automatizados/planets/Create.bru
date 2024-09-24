@@ -1,0 +1,19 @@
+meta {
+  name: Create
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/v1/planets
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "name_eb826ee3c8fe",
+    "terrain": "terrain_21b2ecc4df82",
+    "climate": "climate_b91a0dd7ccb1"
+  }
+}
