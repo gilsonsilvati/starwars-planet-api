@@ -36,4 +36,9 @@ public class PlanetService {
 
         return repository.findAll(query);
     }
+
+    public void remove(Integer id) {
+
+        repository.deleteById(id);
+    }
 }

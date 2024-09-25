@@ -15,8 +15,10 @@ import java.util.Optional;
 import static br.com.starwars.common.PlanetConstants.INVALID_PLANET;
 import static br.com.starwars.common.PlanetConstants.PLANET;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -116,4 +118,18 @@ class PlanetServiceTest {
         assertThat(sut).isEmpty();
     }
 
+    @Test
+    @DisplayName("Remove Planet with existing id does not throw any Exception")
+    void removePlanet_WithExistingId_doesNotThrowAnyException() {
+
+        assertThatCode(() -> service.remove(ID)).doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("Remove Planet with unexisting id throw Exception")
+    void removePlanet_WithUnexistingId_ThrowException() {
+        doThrow(new RuntimeException()).when(repository).deleteById(ID);
+
+        assertThatThrownBy(() -> service.remove(ID)).isInstanceOf(RuntimeException.class);
+    }
 }
