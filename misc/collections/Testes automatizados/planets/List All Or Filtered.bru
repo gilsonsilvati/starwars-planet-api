@@ -1,0 +1,16 @@
+meta {
+  name: List All Or Filtered
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/v1/planets
+  body: none
+  auth: none
+}
+
+params:query {
+  ~terrain: terrain_21b2ecc4df82
+  ~climate: climate_b91a0dd7ccb1
+}

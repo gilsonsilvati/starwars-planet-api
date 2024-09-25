@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Entity
 @Table(name = "planets")
@@ -20,11 +21,19 @@ public class Planet {
     private String terrain;
     private String climate;
 
-    @Deprecated
+    /**
+     * @deprecated Use {@link #Planet(String, String, String)}
+     */
+    @Deprecated(since = "1.0.0")
     public Planet() { }
 
     public Planet(String name, String terrain, String climate) {
         this.name = name;
+        this.terrain = terrain;
+        this.climate = climate;
+    }
+
+    public Planet(String terrain, String climate) {
         this.terrain = terrain;
         this.climate = climate;
     }
@@ -48,6 +57,15 @@ public class Planet {
     @Override
     public boolean equals(Object obj) {
         return EqualsBuilder.reflectionEquals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(name)
+                .append(terrain)
+                .append(climate)
+                .toHashCode();
     }
 
     public PlanetResponse toPlanetResponse() {

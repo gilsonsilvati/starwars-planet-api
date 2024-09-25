@@ -1,4 +1,4 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.8 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.8" pages="3">
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.8 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.8" pages="4">
   <diagram name="Create" id="Y98FDJsNW30C1YdW6Ey_">
     <mxGraphModel dx="1434" dy="870" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -136,6 +136,53 @@
         </mxCell>
         <mxCell id="7at1EOwQKnlNUC2IeqYE-12" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Sim&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="7at1EOwQKnlNUC2IeqYE-1">
           <mxGeometry x="570" y="558" width="50" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Find By Filter" id="nOGrZy-WafcqV5PAi2PB">
+    <mxGraphModel dx="1434" dy="870" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="849tOcZaGfv0WUaqrU57-0" />
+        <mxCell id="849tOcZaGfv0WUaqrU57-1" parent="849tOcZaGfv0WUaqrU57-0" />
+        <mxCell id="849tOcZaGfv0WUaqrU57-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;strokeWidth=2;" edge="1" parent="849tOcZaGfv0WUaqrU57-1" source="849tOcZaGfv0WUaqrU57-3" target="849tOcZaGfv0WUaqrU57-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-3" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Planetas&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="849tOcZaGfv0WUaqrU57-1">
+          <mxGeometry x="480" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;strokeWidth=2;" edge="1" parent="849tOcZaGfv0WUaqrU57-1" source="849tOcZaGfv0WUaqrU57-5" target="849tOcZaGfv0WUaqrU57-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-5" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Listagem de Planetas&lt;/font&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="849tOcZaGfv0WUaqrU57-1">
+          <mxGeometry x="480" y="240" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;flowAnimation=1;strokeWidth=2;" edge="1" parent="849tOcZaGfv0WUaqrU57-1" source="849tOcZaGfv0WUaqrU57-8" target="849tOcZaGfv0WUaqrU57-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;strokeWidth=2;" edge="1" parent="849tOcZaGfv0WUaqrU57-1" source="849tOcZaGfv0WUaqrU57-8" target="849tOcZaGfv0WUaqrU57-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bw3Q0anpm1-M9ByaIrnp-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;flowAnimation=1;" edge="1" parent="849tOcZaGfv0WUaqrU57-1" source="849tOcZaGfv0WUaqrU57-8" target="Bw3Q0anpm1-M9ByaIrnp-0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-8" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Planetas encontrados?&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="849tOcZaGfv0WUaqrU57-1">
+          <mxGeometry x="480" y="440" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-9" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Retorna 200 Ok e lista vazia - [ ]&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="849tOcZaGfv0WUaqrU57-1">
+          <mxGeometry x="200" y="440" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-10" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Não&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="849tOcZaGfv0WUaqrU57-1">
+          <mxGeometry x="385" y="448" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-11" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Retorna 200 Ok e lista de Planetas&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="849tOcZaGfv0WUaqrU57-1">
+          <mxGeometry x="480" y="640" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="849tOcZaGfv0WUaqrU57-12" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Sim&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="849tOcZaGfv0WUaqrU57-1">
+          <mxGeometry x="570" y="558" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Bw3Q0anpm1-M9ByaIrnp-0" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Filtros possíveis:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;terrain, climate&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;(sem filtros, com ambos ou com apenas um deles)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="849tOcZaGfv0WUaqrU57-1">
+          <mxGeometry x="760" y="440" width="160" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
