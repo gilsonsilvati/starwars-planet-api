@@ -7,8 +7,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static br.com.starwars.common.PlanetConstants.INVALID_PLANET;
 import static br.com.starwars.common.PlanetConstants.PLANET;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,6 +32,14 @@ class PlanetServiceTest {
 
         assertThat(sut).isNotNull();
         assertThat(sut).isEqualTo(PLANET);
+    }
+
+    @Test
+    @DisplayName("Create Planet with invalid data throw exception")
+    void createPlanet_WithInvalidData_ThrowException() {
+        when(repository.save(INVALID_PLANET)).thenThrow(RuntimeException.class);
+
+        assertThatThrownBy(() -> service.create(INVALID_PLANET)).isInstanceOf(RuntimeException.class);
     }
 
 }
