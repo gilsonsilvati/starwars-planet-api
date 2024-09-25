@@ -18,8 +18,13 @@ public class PlanetService {
         return repository.save(planet);
     }
 
-    public Optional<Planet> get(Integer id) {
+    public Optional<Planet> getById(Integer id) {
 
         return repository.findById(id);
+    }
+
+    public Optional<Planet> getByName(String name) {
+
+        return repository.findByName(name);
     }
 }

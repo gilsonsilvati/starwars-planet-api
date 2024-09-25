@@ -48,10 +48,10 @@ class PlanetServiceTest {
 
     @Test
     @DisplayName("Get Planet by existing id return Planet")
-    void getPlanet_ByExistingId_ReturnPlanet() {
+    void getByIdPlanet_ByExistingId_ReturnPlanet() {
         when(repository.findById(ID)).thenReturn(Optional.of(PLANET));
 
-        var sut = service.get(ID);
+        var sut = service.getById(ID);
 
         assertThat(sut).isNotEmpty();
         assertThat(sut.get()).isEqualTo(PLANET);
@@ -59,10 +59,31 @@ class PlanetServiceTest {
 
     @Test
     @DisplayName("Get Planet by unexisting id return empty")
-    void getPlanet_ByUnexistingId_ReturnEmpty() {
+    void getByIdPlanet_ByUnexistingId_ReturnEmpty() {
         when(repository.findById(ID)).thenReturn(Optional.empty());
 
-        var sut = service.get(ID);
+        var sut = service.getById(ID);
+
+        assertThat(sut).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Get Planet by existing name return Planet")
+    void getByNamePlanet_ByExistingName_ReturnPlanet() {
+        when(repository.findByName(PLANET.getName())).thenReturn(Optional.of(PLANET));
+
+        var sut = service.getByName(PLANET.getName());
+
+        assertThat(sut).isNotEmpty();
+        assertThat(sut.get()).isEqualTo(PLANET);
+    }
+
+    @Test
+    @DisplayName("Get Planet by unexisting name return empty")
+    void getByNamePlanet_ByUnexistingName_ReturnEmpty() {
+        when(repository.findByName(INVALID_PLANET.getName())).thenReturn(Optional.empty());
+
+        var sut = service.getByName(INVALID_PLANET.getName());
 
         assertThat(sut).isEmpty();
     }
