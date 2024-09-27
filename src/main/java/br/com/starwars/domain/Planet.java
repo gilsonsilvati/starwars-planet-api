@@ -20,7 +20,7 @@ public class Planet {
     private Integer id;
 
     @NotEmpty
-    @Column(nullable = false)
+    @Column(nullable = false,  unique = true)
     private String name;
 
     @NotEmpty
@@ -50,6 +50,9 @@ public class Planet {
 
     public Integer getId() {
         return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

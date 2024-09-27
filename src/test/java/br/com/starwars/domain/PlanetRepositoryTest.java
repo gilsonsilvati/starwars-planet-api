@@ -39,10 +39,20 @@ class PlanetRepositoryTest {
     @Test
     @DisplayName("Create Planet with invalid data throw exception")
     void createPlanet_WithInvalidData_ThrowException() {
-        Planet emptyPlanet = EMPTY_PLANET;
-        Planet invalidPlanet = INVALID_PLANET;
+        var emptyPlanet = EMPTY_PLANET;
+        var invalidPlanet = INVALID_PLANET;
 
         assertThatThrownBy(() -> repository.save(emptyPlanet)).isInstanceOf(RuntimeException.class);
         assertThatThrownBy(() -> repository.save(invalidPlanet)).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("Create Planet with existing name return exception")
+    void createPlanet_WithExistingName_ReturnException() {
+        var savedPlanet = entityManager.persistFlushFind(PLANET);
+        entityManager.detach(savedPlanet);
+        savedPlanet.setId(null);
+
+        assertThatThrownBy(() -> repository.save(savedPlanet)).isInstanceOf(RuntimeException.class);
     }
 }
