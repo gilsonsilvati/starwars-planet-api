@@ -12,8 +12,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static br.com.starwars.common.PlanetConstants.INVALID_PLANET;
-import static br.com.starwars.common.PlanetConstants.PLANET;
+import static br.com.starwars.commons.PlanetConstants.INVALID_PLANET;
+import static br.com.starwars.commons.PlanetConstants.PLANET;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
