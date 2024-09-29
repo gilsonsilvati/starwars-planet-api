@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static br.com.starwars.commons.PlanetConstants.INVALID_PLANET_REQUEST;
 import static br.com.starwars.commons.PlanetConstants.PLANET;
 import static br.com.starwars.commons.PlanetConstants.PLANET_REQUEST;
 import static br.com.starwars.commons.PlanetConstants.PLANET_RESPONSE;
@@ -38,9 +39,20 @@ class PlanetControllerTest {
         when(service.create(PLANET_REQUEST.toPlanet())).thenReturn(PLANET);
 
         mockMvc.perform(post(URL)
-                .content(mapper.writeValueAsString(PLANET_REQUEST))
-                .contentType(APPLICATION_JSON))
+                        .content(mapper.writeValueAsString(PLANET_REQUEST))
+                        .contentType(APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(content().json(mapper.writeValueAsString(PLANET_RESPONSE)));
+    }
+
+    @Test
+    @DisplayName("Create Planet with invalid data return bad request")
+    void createPlanet_WithInvalidData_ReturnUnprocessableEntity() throws Exception {
+        when(service.create(INVALID_PLANET_REQUEST.toPlanet())).thenReturn(PLANET);
+
+        mockMvc.perform(post(URL)
+                        .content(mapper.writeValueAsString(INVALID_PLANET_REQUEST))
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isUnprocessableEntity());
     }
 }

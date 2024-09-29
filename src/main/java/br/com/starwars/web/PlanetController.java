@@ -2,6 +2,7 @@ package br.com.starwars.web;
 
 import br.com.starwars.domain.Planet;
 import br.com.starwars.domain.PlanetService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +27,7 @@ public class PlanetController {
     }
 
     @PostMapping
-    public ResponseEntity<PlanetResponse> create(@RequestBody PlanetRequest request) {
+    public ResponseEntity<PlanetResponse> create(@RequestBody @Valid PlanetRequest request) {
 
         var planet = service.create(request.toPlanet());
 
