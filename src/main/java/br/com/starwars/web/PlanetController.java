@@ -50,7 +50,7 @@ public class PlanetController {
 
     @GetMapping
     public ResponseEntity<List<PlanetResponse>> listAllOrFiltered(@RequestParam(required = false) String terrain,
-                                                                 @RequestParam(required = false) String climate) {
+                                                                  @RequestParam(required = false) String climate) {
 
         var planets = service.list(terrain, climate).stream().map(Planet::toPlanetResponse).toList();
 
