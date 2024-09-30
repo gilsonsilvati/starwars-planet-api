@@ -45,7 +45,7 @@ class PlanetServiceTest {
     }
 
     @Test
-    @DisplayName("Create Planet with invalid data throw exception")
+    @DisplayName("Create Planet with invalid data throw Exception")
     void createPlanet_WithInvalidData_ThrowException() {
         when(repository.save(INVALID_PLANET)).thenThrow(RuntimeException.class);
 
@@ -64,7 +64,7 @@ class PlanetServiceTest {
     }
 
     @Test
-    @DisplayName("Get Planet by unexisting id return empty")
+    @DisplayName("Get Planet by unexisting id return Empty")
     void getByIdPlanet_ByUnexistingId_ReturnEmpty() {
         when(repository.findById(ID)).thenReturn(Optional.empty());
 
@@ -85,7 +85,7 @@ class PlanetServiceTest {
     }
 
     @Test
-    @DisplayName("Get Planet by unexisting name return empty")
+    @DisplayName("Get Planet by unexisting name return Empty")
     void getByNamePlanet_ByUnexistingName_ReturnEmpty() {
         when(repository.findByName(INVALID_PLANET.getName())).thenReturn(Optional.empty());
 
