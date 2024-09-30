@@ -77,6 +77,24 @@ class PlanetRepositoryTest {
         assertThat(sut).isEmpty();
     }
 
+    @Test
+    @DisplayName("Get Planet with by existing name return Planet")
+    void getPlanet_WithByExistingName_ReturnPlanet() {
+        var savedPlanet = entityManager.persistFlushFind(PLANET);
+        var sut = repository.findByName(savedPlanet.getName());
+
+        assertThat(sut).isNotEmpty();
+        assertThat(sut.get()).isEqualTo(savedPlanet);
+    }
+
+    @Test
+    @DisplayName("Get Planet with by unexisting name return Empty")
+    void getPlanet_WithByUnexistingName_ReturnEmpty() {
+        var sut = repository.findByName(PLANET.getName());
+
+        assertThat(sut).isEmpty();
+    }
+
     @AfterEach
     void tearDown() {
         PLANET.setId(null);

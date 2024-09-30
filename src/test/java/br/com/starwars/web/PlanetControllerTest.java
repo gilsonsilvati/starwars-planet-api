@@ -90,4 +90,21 @@ class PlanetControllerTest {
         mockMvc.perform(get(URL + "/" + ID))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    @DisplayName("Get Planet with by existing name return OK")
+    void getPlanet_WithByExistingName_ReturnOK() throws Exception {
+        when(service.getByName(PLANET.getName())).thenReturn(Optional.of(PLANET));
+
+        mockMvc.perform(get(URL + "/name/" + PLANET.getName()))
+                .andExpect(status().isOk())
+                .andExpect(content().json(mapper.writeValueAsString(PLANET_RESPONSE)));
+    }
+
+    @Test
+    @DisplayName("Get Planet with by unexisting name return Not Found")
+    void getPlanet_WithByUnexistingName_ReturnNotFound() throws Exception {
+        mockMvc.perform(get(URL + "/name/" + PLANET.getName()))
+                .andExpect(status().isNotFound());
+    }
 }
