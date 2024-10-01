@@ -15,6 +15,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import static br.com.starwars.commons.PlanetConstants.PLANET_REQUEST_IT;
 import static br.com.starwars.commons.PlanetConstants.TATOOINE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.HttpMethod.DELETE;
 
 @ActiveProfiles("it")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -27,6 +28,7 @@ class PlanetIT {
 
     static final String URL = "/api/v1/planets";
     static final Integer ID = 1;
+    static final String NAME = "Tatooine";
 
     @Test
     @DisplayName("Create Planet Return Created")
@@ -52,5 +54,64 @@ class PlanetIT {
         assertThat(sut.getBody()).isNotNull();
 
         assertThat(sut.getBody()).isEqualTo(TATOOINE.toPlanetResponse());
+    }
+
+    @Test
+    @DisplayName("Find Planet By Name Return Ok")
+    void findPlanetByName_ReturnOk() {
+        var sut = restTemplate.getForEntity(URL + "/name/" + NAME, PlanetResponse.class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        assertThat(sut.getBody()).isNotNull();
+
+        assertThat(sut.getBody()).isEqualTo(TATOOINE.toPlanetResponse());
+    }
+
+    @Test
+    @DisplayName("List Planets Return All Planets")
+    void listPlanets_ReturnAllPlanets() {
+        var sut = restTemplate.getForEntity(URL, PlanetResponse[].class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        assertThat(sut.getBody()).isNotNull();
+
+        assertThat(sut.getBody()).hasSize(3);
+        assertThat(sut.getBody()[0]).isEqualTo(TATOOINE.toPlanetResponse());
+    }
+
+    @Test
+    @DisplayName("List Planets By Climate Return Planets")
+    void listPlanets_ByClimate_ReturnPlanets() {
+        var sut = restTemplate.getForEntity(URL + "?climate=" + TATOOINE.getClimate(), PlanetResponse[].class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        assertThat(sut.getBody()).isNotNull();
+
+        assertThat(sut.getBody()).hasSize(1);
+        assertThat(sut.getBody()[0]).isEqualTo(TATOOINE.toPlanetResponse());
+    }
+
+    @Test
+    @DisplayName("List Planets By Terrain Return Planets")
+    void listPlanets_ByTerrain_ReturnPlanets() {
+        var sut = restTemplate.getForEntity(URL + "?terrain=" + TATOOINE.getTerrain(), PlanetResponse[].class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        assertThat(sut.getBody()).isNotNull();
+
+        assertThat(sut.getBody()).hasSize(1);
+        assertThat(sut.getBody()[0]).isEqualTo(TATOOINE.toPlanetResponse());
+    }
+
+    @Test
+    @DisplayName("Remove Planets Return No Content")
+    void removePlanets_ReturnNoContent() {
+        var sut = restTemplate.exchange(URL + "/" + ID, DELETE, null, Void.class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 }
