@@ -14,6 +14,7 @@ public class PlanetConstants {
     public static final Planet EMPTY_PLANET = new Planet();
 
     public static final PlanetRequest PLANET_REQUEST = new PlanetRequest("Tatooine", "desert", "arid");
+    public static final PlanetRequest PLANET_REQUEST_IT = new PlanetRequest("Tatooine2", "desert2", "arid2");
     public static final PlanetRequest INVALID_PLANET_REQUEST = new PlanetRequest("", "", "");
 
     public static final PlanetResponse PLANET_RESPONSE = new PlanetResponse("Tatooine", "desert", "arid");
