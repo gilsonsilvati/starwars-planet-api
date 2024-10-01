@@ -9,12 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 import static br.com.starwars.commons.PlanetConstants.PLANET_REQUEST;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles("it")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Sql(scripts = "/truncate_planets.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 class PlanetIT {
 
     @Autowired
