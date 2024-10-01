@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
-import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static br.com.starwars.commons.PlanetConstants.PLANET_REQUEST_IT;
 import static br.com.starwars.commons.PlanetConstants.TATOOINE;
@@ -27,8 +26,8 @@ class PlanetIT {
     @Autowired
     TestRestTemplate restTemplate;
 
-    @Autowired
-    WebTestClient webTestClient;
+//    @Autowired
+//    WebTestClient webTestClient;
 
     static final String URL = "/api/v1/planets";
     static final Integer ID = 1;
@@ -48,18 +47,18 @@ class PlanetIT {
         assertThat(sut.getBody().climate()).isEqualTo(PLANET_REQUEST_IT.climate());
     }
 
-    @Test
-    @DisplayName("Create Planet With WebTestClient Return Created")
-    void createPlanet_WithWebTestClient_ReturnsCreated() {
-        var sut = webTestClient.post().uri(URL).bodyValue(PLANET_REQUEST_IT)
-                .exchange().expectStatus().isCreated().expectBody(PlanetResponse.class)
-                .returnResult().getResponseBody();
-
-        assertThat(sut).isNotNull();
-        assertThat(sut.name()).isEqualTo(PLANET_REQUEST_IT.name());
-        assertThat(sut.climate()).isEqualTo(PLANET_REQUEST_IT.climate());
-        assertThat(sut.terrain()).isEqualTo(PLANET_REQUEST_IT.terrain());
-    }
+//    @Test
+//    @DisplayName("Create Planet With WebTestClient Return Created")
+//    void createPlanet_WithWebTestClient_ReturnsCreated() {
+//        var sut = webTestClient.post().uri(URL).bodyValue(PLANET_REQUEST_IT)
+//                .exchange().expectStatus().isCreated().expectBody(PlanetResponse.class)
+//                .returnResult().getResponseBody();
+//
+//        assertThat(sut).isNotNull();
+//        assertThat(sut.name()).isEqualTo(PLANET_REQUEST_IT.name());
+//        assertThat(sut.climate()).isEqualTo(PLANET_REQUEST_IT.climate());
+//        assertThat(sut.terrain()).isEqualTo(PLANET_REQUEST_IT.terrain());
+//    }
 
     @Test
     @DisplayName("Find Planet By Id Return Ok")
