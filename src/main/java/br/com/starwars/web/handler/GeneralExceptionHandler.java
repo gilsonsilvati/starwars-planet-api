@@ -2,7 +2,6 @@ package br.com.starwars.web.handler;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.Instant;
 
+import static org.springframework.http.HttpStatus.CONFLICT;
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+
 @RestControllerAdvice
 public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -23,12 +25,12 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
 
-        return super.handleMethodArgumentNotValid(ex, headers, HttpStatus.UNPROCESSABLE_ENTITY, request);
+        return super.handleMethodArgumentNotValid(ex, headers, UNPROCESSABLE_ENTITY, request);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ProblemDetail handleConflict(DataIntegrityViolationException ex) {
-        var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getLocalizedMessage());
+        var problemDetail = ProblemDetail.forStatusAndDetail(CONFLICT, ex.getLocalizedMessage());
         problemDetail.setTitle("Dado informado já existe");
         problemDetail.setDetail("É preciso informar um dado válido");
         problemDetail.setProperty("StackTrace", ex.getStackTrace());

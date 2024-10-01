@@ -126,6 +126,18 @@ class PlanetRepositoryTest {
         assertThat(sut).isEmpty();
     }
 
+    @Test
+    @DisplayName("Remove Planet with existing id, removes Planet from Database")
+    void removePlanet_WithExistingId_RemovesPlanetFromDatabase() {
+        var savedPlanet = entityManager.persistFlushFind(PLANET);
+
+        repository.deleteById(savedPlanet.getId());
+
+        var sut = entityManager.find(Planet.class, savedPlanet.getId());
+
+        assertThat(sut).isNull();
+    }
+
     @AfterEach
     void tearDown() {
         PLANET.setId(null);

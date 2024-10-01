@@ -24,6 +24,7 @@ import static br.com.starwars.commons.PlanetConstants.TATOOINE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -136,5 +137,12 @@ class PlanetControllerTest {
         mockMvc.perform(get(URL))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
+    }
+
+    @Test
+    @DisplayName("Remove Planet with existing id return No Content")
+    void removePlanet_WithExistingId_ReturnNoContent() throws Exception {
+        mockMvc.perform(delete(URL + "/" + ID))
+                .andExpect(status().isNoContent());
     }
 }
