@@ -48,6 +48,17 @@ public class Planet {
         this.climate = climate;
     }
 
+    /**
+     * @deprecated Use {@link #Planet(String, String, String)}
+     */
+    @Deprecated(since = "1.0.0")
+    public Planet(Integer id, String name, String terrain, String climate) {
+        this.id = id;
+        this.name = name;
+        this.terrain = terrain;
+        this.climate = climate;
+    }
+
     public Integer getId() {
         return id;
     }

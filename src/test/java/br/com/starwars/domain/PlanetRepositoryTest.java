@@ -6,10 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.domain.Example;
+import org.springframework.test.context.jdbc.Sql;
 
 import static br.com.starwars.commons.PlanetConstants.EMPTY_PLANET;
 import static br.com.starwars.commons.PlanetConstants.INVALID_PLANET;
 import static br.com.starwars.commons.PlanetConstants.PLANET;
+import static br.com.starwars.commons.PlanetConstants.TATOOINE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -91,6 +94,34 @@ class PlanetRepositoryTest {
     @DisplayName("Get Planet with by unexisting name return Empty")
     void getPlanet_WithByUnexistingName_ReturnEmpty() {
         var sut = repository.findByName(PLANET.getName());
+
+        assertThat(sut).isEmpty();
+    }
+
+    @Sql(scripts = "/import_planets.sql")
+    @Test
+    @DisplayName("List Planets returns filtered Planets")
+    void listPlanets_ReturnsFilteredPlanets() throws Exception {
+        Example<Planet> queryWithoutFilters = QueryBuilder.makeQuery(new Planet());
+        Example<Planet> queryWithFilters = QueryBuilder.makeQuery(new Planet(TATOOINE.getTerrain(), TATOOINE.getClimate()));
+
+        var sutWithoutFilters = repository.findAll(queryWithoutFilters);
+        var sutWithFilters = repository.findAll(queryWithFilters);
+
+        assertThat(sutWithoutFilters).isNotEmpty();
+        assertThat(sutWithoutFilters).hasSize(3);
+
+        assertThat(sutWithFilters).isNotEmpty();
+        assertThat(sutWithFilters).hasSize(1);
+        assertThat(sutWithFilters.get(0)).isEqualTo(TATOOINE);
+    }
+
+    @Test
+    @DisplayName("List Planets return Empty")
+    void listPlanets_ReturnEmpty() throws Exception {
+        Example<Planet> query = QueryBuilder.makeQuery(new Planet());
+
+        var sut = repository.findAll(query);
 
         assertThat(sut).isEmpty();
     }

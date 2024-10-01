@@ -11,12 +11,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static br.com.starwars.commons.PlanetConstants.INVALID_PLANET_REQUEST;
 import static br.com.starwars.commons.PlanetConstants.PLANET;
+import static br.com.starwars.commons.PlanetConstants.PLANETS;
 import static br.com.starwars.commons.PlanetConstants.PLANET_REQUEST;
 import static br.com.starwars.commons.PlanetConstants.PLANET_RESPONSE;
+import static br.com.starwars.commons.PlanetConstants.TATOOINE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -106,5 +110,31 @@ class PlanetControllerTest {
     void getPlanet_WithByUnexistingName_ReturnNotFound() throws Exception {
         mockMvc.perform(get(URL + "/name/" + PLANET.getName()))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("List Planets returns filtered Planets")
+    void listPlanets_ReturnsFilteredPlanets() throws Exception {
+        when(service.list(null, null)).thenReturn(PLANETS);
+        when(service.list(TATOOINE.getTerrain(), TATOOINE.getClimate())).thenReturn(List.of(TATOOINE));
+
+        mockMvc.perform(get(URL))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{}, {}, {}]"));
+
+        mockMvc.perform(get(URL + "?terrain=" + TATOOINE.getTerrain() + "&climate=" + TATOOINE.getClimate()))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{}]"))
+                .andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(TATOOINE.toPlanetResponse()))));
+    }
+
+    @Test
+    @DisplayName("List Planets return Empty")
+    void listPlanets_ReturnEmpty() throws Exception {
+        when(service.list(null, null)).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get(URL))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
     }
 }
