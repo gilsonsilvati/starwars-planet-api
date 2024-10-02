@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.3.4'
     id 'io.spring.dependency-management' version '1.1.6'
     id 'jacoco'
+    id 'info.solidsoft.pitest' version '1.15.0'
 }
 
 group = 'br.com.starwars'
@@ -57,4 +58,22 @@ jacocoTestReport {
                 })
         )
     }
+}
+
+pitest {
+    junit5PluginVersion = '1.2.1'
+    pitestVersion = '1.15.2'
+
+    targetClasses = ['br.com.starwars.*'] // Pacotes a serem testados
+    targetTests = ['br.com.starwars.*Test'] // Testes a serem executados
+    excludedClasses = [
+            'br.com.starwars.domain.Planet', 'br.com.starwars.web.handler.GeneralExceptionHandler'
+    ] // Excluir classes de um pacote específico
+    threads = 4 // Número de threads para execução
+    outputFormats = ['HTML'] // Formatos de saída
+    timestampedReports = false // Desabilita timestamps nos relatórios
+    mutationThreshold = 80 // Percentual mínimo de mutações que devem ser cobertas
+    coverageThreshold = 80 // Percentual mínimo de cobertura de código
+    mutators = ['DEFAULTS'] // Tipos de mutações a serem aplicadas
+    verbose = true // Habilita logs detalhados
 }
